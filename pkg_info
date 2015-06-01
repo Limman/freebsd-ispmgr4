@@ -1,0 +1,41 @@
+#!/bin/sh
+
+sqlite=`which sqlite3`
+db_path=/var/db/pkgdb/local.sqlite
+pkg_path=/var/db/pkg
+
+if [ ! -f "$sqlite" ]
+then
+    echo "Please install sqlite3 (/usr/ports/databases/sqlite3)"
+    exit
+fi
+
+if [ ! -f "$db_path" ]
+then
+    echo "DB file not found"
+    exit
+fi
+
+
+rm -r $pkg_path/*
+pkg_list=`$sqlite $db_path "SELECT name || '-' || version FROM packages;"`
+for row in $pkg_list
+do
+    mkdir $pkg_path/$row    
+done
+
+
+if [ $# -eq 0 ]
+then
+    $sqlite $db_path "SELECT name || '-' || version FROM packages;"
+    exit
+fi
+
+case "$1" in
+-La) 
+    $sqlite $db_path "SELECT path FROM files;"
+    ;;
+*)
+    echo "Parameter \"$1\" is not developed"
+    ;;
+esac
