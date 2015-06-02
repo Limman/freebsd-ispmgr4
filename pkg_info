@@ -35,6 +35,9 @@ case "$1" in
 -La) 
     $sqlite $db_path "SELECT path FROM files;"
     ;;
+-L) 
+    $sqlite $db_path "SELECT f.path FROM files f JOIN packages p ON f.package_id = p.id WHERE (p.name || '-' || p.version) = '$2';"
+    ;;    
 *)
     echo "Parameter \"$1\" is not developed"
     ;;
