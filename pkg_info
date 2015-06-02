@@ -16,7 +16,6 @@ then
     exit
 fi
 
-
 rm -r $pkg_path/*
 pkg_list=`$sqlite $db_path "SELECT name || '-' || version FROM packages;"`
 for row in $pkg_list
@@ -24,10 +23,9 @@ do
     mkdir $pkg_path/$row    
 done
 
-
 if [ $# -eq 0 ]
 then
-    $sqlite $db_path "SELECT name || '-' || version FROM packages;"
+    $sqlite $db_path "SELECT name || '-' || version FROM packages ORDER BY name;"
     exit
 fi
 
