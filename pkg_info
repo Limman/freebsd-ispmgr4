@@ -16,7 +16,9 @@ then
     exit
 fi
 
-rm -r $pkg_path/*
+if [ "$(ls -A $pkg_path)" ]; then
+    rm -r $pkg_path/*
+fi
 pkg_list=`$sqlite $db_path "SELECT name || '-' || version FROM packages;"`
 for row in $pkg_list
 do
