@@ -28,17 +28,19 @@ if [ $# -eq 0 ]; then
     exit
 fi
 
-if [ -z "`ifconfig | grep $2`" ] && [ $2 -ne "" ]; then
-    echo "Wrong IP address"
-    exit
+if [ ! -z "$2" ]; then
+    if [ -z "`ifconfig | grep $2`" ]; then
+        echo "Wrong IP address"
+        exit
+    fi
 fi
 
-if [ $1 -ne "Pro" ] && [ $1 -ne "Lite" ]; then
+if [ $1 != "Pro" ] && [ $1 != "Lite" ]; then
     echo "Wrong ISPmanager version"
     exit
 fi
 
-if [ ! -d "/usr/ports" ]; then
+if [ ! -f "/usr/ports/Makefile" ]; then
     echo "Downloading ports collection..."
     svn --quiet co svn://svn.freebsd.org/ports/head/ /usr/ports
 fi
