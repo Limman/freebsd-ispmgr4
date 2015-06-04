@@ -19,6 +19,6 @@ if [ ! -f "/usr/sbin/pkg_info" ]; then
     mv /usr/sbin/pkg_info /usr/sbin/pkg_info.orig
 fi
 
-fetch -o /usr/sbin/pkg_info -q --no-verify-peer "https://raw.githubusercontent.com/Limman/freebsd-ispmgr4/master/pkg_info"
+fetch -o /usr/sbin/pkg_info -q --no-verify-peer "https://github.com/Limman/freebsd-ispmgr4/raw/master/pkg_info"
 chmod 555 /usr/sbin/pkg_info
 echo "Done. Run pkg_info to build old-style packages database for ISPmanager 4"
