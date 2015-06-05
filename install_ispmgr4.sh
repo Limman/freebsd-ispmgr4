@@ -48,8 +48,8 @@ fi
 cd /usr/ports
 make fetchindex
 
-if [ $OSver -eq "10" ]; then
-    cp /usr/ports/INDEX-10 /usr/ports/INDEX-9
+if [ $OSver -eq "10" ] && [ ! -f "/usr/ports/INDEX-9" ]; then
+    ln -s /usr/ports/INDEX-10 /usr/ports/INDEX-9
 fi
 
 echo "Installing new pkg_info..."
