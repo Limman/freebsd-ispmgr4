@@ -62,7 +62,7 @@ if [ ! -d "/var/db/pkgdb" ]; then
     fi
 
     sed -i '' 's/\#PKG_DBDIR/PKG_DBDIR/g' /usr/local/etc/pkg.conf
-    sed -i '' 's/\/var\/db\/pkg/\/var\/db\/pkgdb/g' /usr/local/etc/pkg.conf
+    sed -i '' 's/\"\/var\/db\/pkg\"/\"\/var\/db\/pkgdb\"/g' /usr/local/etc/pkg.conf
 
     if [ -f "/usr/sbin/pkg_info" ]; then
         mv /usr/sbin/pkg_info /usr/sbin/pkg_info.orig
